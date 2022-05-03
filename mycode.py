@@ -2,12 +2,12 @@ import sys
 for line in sys.stdin:
     line = line.upper()
 def mycipher(shift_num, txt):
+  txt = txt.upper()
   block = 0 #keeps track of 5 letters per block
   per_line = 0 #keepts track of 10 blocks per line
   encrypted = ""
 
   for char in txt:
-    num1 = shift       
     asc = ord(char) #to find the value in ascii of the character so we can encrypt
     if (asc >= 65 and asc <= 90):
       is_letter = True #do this to make sure we aren't changing the character of any spaces/specia    l characters
@@ -17,19 +17,19 @@ def mycipher(shift_num, txt):
       continue
     else:
       block += 1
-      while num1 > 0:
-        asc+=1
-        num1-=1
-        if asc > 90:
-          asc = 65 + num1 #to make sure we stay in the range of A-Z
-          num1 = 0
+      new_char = chr((asc + shift_num-65) % 26 + 65)
       if block == 5:
+        per_line += 1
         if per_line == 10:
-          encrypted = encrypted + chr(asc) + "\n"
+          encrypted = encrypted + new_char + "\n"
           per_line = 0 #resets the var
+          block = 0
         else:
-          encrypted = encrypted + chr(asc) + " "
+          encrypted = encrypted + new_char + " "
           block = 0 #resets the var
-      
+      else:
+        encrypted += new_char
+
+  return encrypted
      
 
