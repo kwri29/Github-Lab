@@ -1,8 +1,10 @@
 import sys
+
 for line in sys.stdin:
     line = line.upper()
+
 def mycipher(shift_num, txt):
-  txt = txt.upper()
+  
   block = 0 #keeps track of 5 letters per block
   per_line = 0 #keepts track of 10 blocks per line
   encrypted = ""
@@ -30,6 +32,6 @@ def mycipher(shift_num, txt):
       else:
         encrypted += new_char
 
-  return encrypted
+  print(encrypted)
      
 
